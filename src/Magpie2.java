@@ -46,9 +46,11 @@ public class Magpie2 {
 		} else if (statement.trim().length() < 1) {
 			response = "Say something, please.";
 		} else if(statement.indexOf("fortnite") >= 0) {
-			response = "OK Boomer.";
+			response = "OK Zoomer.";
 		} else if (statement.indexOf("epic") >= 0) {
-			response = "Are you a GAMER?";
+			response = "Are you an EPIC Gamer?";
+		} else if (statement.indexOf("rick") >= 0) {
+			response = "Rick and Morty, or... https://www.youtube.com/watch?v=oHg5SJYRHA0 ?";
 		} else {
 			response = getRandomResponse();
 		}

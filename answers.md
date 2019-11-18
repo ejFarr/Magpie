@@ -1,0 +1,1 @@
+It will respond to the keyword within the word, so if you have "no" within a word it will pick it out and give back the response in the code for "no"
