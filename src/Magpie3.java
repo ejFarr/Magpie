@@ -29,13 +29,26 @@ public class Magpie3 {
 		String response = "";
 		if (statement.length() == 0) {
 			response = "Say something, please.";
-		} else if (findKeyword(statement, "no") >= 0) {
+		} else if (findKeyword(statement, "no", 0) >= 0) {
 			response = "Why so negative?";
-		} else if (findKeyword(statement, "mother") >= 0
-				|| findKeyword(statement, "father") >= 0
-				|| findKeyword(statement, "sister") >= 0
-				|| findKeyword(statement, "brother") >= 0) {
+		} else if (findKeyword(statement, "mother", 0) >= 0
+				|| findKeyword(statement, "father", 0) >= 0
+				|| findKeyword(statement, "sister", 0) >= 0
+				|| findKeyword(statement, "brother", 0) >= 0) {
 			response = "Tell me more about your family.";
+		}  else if (findKeyword(statement, "cat", 0) >= 0 
+		|| findKeyword(statement, "dog", 0) >=0) {
+			response = "Tell me more about your pets";
+		} else if (findKeyword(statement, "padjen", 0) >=0) {
+			response = "He sounds like a grat person";
+		} else if (statement.trim().length() < 1) {
+			response = "Say something, please.";
+		} else if(findKeyword(statement, "fortnite", 0) >= 0) {
+			response = "OK Zoomer.";
+		} else if (findKeyword(statement, "epic", 0) >= 0) {
+			response = "Are you an EPIC Gamer?";
+		} else if (findKeyword(statement, "rick", 0) >= 0) {
+			response = "Rick and Morty, or... https://www.youtube.com/watch?v=oHg5SJYRHA0 ?";
 		} else {
 			response = getRandomResponse();
 		}
@@ -62,22 +75,24 @@ public class Magpie3 {
 
 		// The only change to incorporate the startPos is in
 		// the line below
-		int psn = phrase.indexOf(goal, startPos);
+		int position = phrase.indexOf(goal, startPos);
 
 		// Refinement--make sure the goal isn't part of a
 		// word
-		while (psn >= 0) {
+		int iteration = 0;
+		while (position >= 0) {
+			iteration++;
 			// Find the string of length 1 before and after
 			// the word
 			String before = " ", after = " ";
-			if (psn > 0) {
-				before = phrase.substring(psn - 1, psn);
+			if (position > 0) {
+				before = phrase.substring(position - 1, position);
 			}
-			if (psn + goal.length() < phrase.length()) {
-				after = phrase.substring(psn + goal.length(),
-						psn + goal.length() + 1);
+			if (position + goal.length() < phrase.length()) {
+				after = phrase.substring(position + goal.length(),
+						position + goal.length() + 1);
 			}
-
+			System.out.println(iteration + " " + position + " " + before + " " + after);
 			// If before and after aren't letters, we've
 			// found the word
 			if (((before.compareTo("a") < 0) || (before.compareTo("z") > 0)) // before
@@ -86,13 +101,13 @@ public class Magpie3 {
 																				// a
 																				// letter
 					&& ((after.compareTo("a") < 0) || (after.compareTo("z") > 0))) {
-				return psn;
+				return position;
 			}
 
 			// The last position didn't work, so let's find
 			// the next, if there is one.
-			psn = phrase.indexOf(goal, psn + 1);
-
+			position = phrase.indexOf(goal, position + 1);
+			iteration++;
 		}
 
 		return -1;
@@ -134,6 +149,10 @@ public class Magpie3 {
 			response = "Do you really think so?";
 		} else if (whichResponse == 3) {
 			response = "You don't say.";
+		} else if (whichResponse == 4) {
+			response = "Life never gave you lemons, they are a hybrid of citron and oranges, we made them ourselves.";
+		} else if (whichResponse == 5) {
+			response = "Are you sure?";
 		}
 
 		return response;
